@@ -8,7 +8,7 @@ _generator = None
 _tokenizer = None
 
 
-# ── Generator Loader (FLAN-T5 correct usage) ────────────────────────────────
+# ── Generator Loader (FLAN-T5) ────────────────────────────────
 def _load_generator():
     global _generator, _tokenizer
     if _generator is None:

@@ -12,7 +12,7 @@ with open("data/sample.txt","r",encoding="utf-8") as f:
     text = f.read()
 
 print("=" * 60)
-print("LEGAL-LENS V2 — FULL PIPELINE DEMO")
+print("LEGAL_LENS V2")
 print("=" * 60)
 print(f"\nDocument ({len(text)} chars):\n{text}\n")
 
