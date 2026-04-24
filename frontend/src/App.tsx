@@ -168,12 +168,50 @@ function App() {
         );
 
       case 'timeline':
+        let timelineContent;
+        if (typeof msg.content === 'string') {
+          timelineContent = <div style={{ whiteSpace: 'pre-wrap' }}>{msg.content}</div>;
+        } else {
+          const dates = msg.content?.dates || [];
+          const obligations = msg.content?.obligations || [];
+          
+          timelineContent = (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {dates.length > 0 && (
+                <div>
+                  <strong style={{ color: 'var(--text-light)' }}>Extracted Dates:</strong>
+                  <ul className="timeline-list">
+                    {dates.map((d: any, i: number) => (
+                      <li key={i}>
+                        <span style={{ color: 'var(--primary)' }}>{d.reference}</span> ({d.type})
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {obligations.length > 0 && (
+                <div>
+                  <strong style={{ color: 'var(--text-light)' }}>Key Obligations:</strong>
+                  <ul className="timeline-list">
+                    {obligations.slice(0, 5).map((o: any, i: number) => (
+                      <li key={i}>{o.text}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {dates.length === 0 && obligations.length === 0 && (
+                <div>No specific dates or obligations found.</div>
+              )}
+            </div>
+          );
+        }
+
         return (
           <div>
             <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: 0, color: 'var(--warning)' }}>
               <Clock size={18} /> Timeline Events
             </h4>
-            <div style={{ whiteSpace: 'pre-wrap' }}>{msg.content}</div>
+            {timelineContent}
           </div>
         );
 
